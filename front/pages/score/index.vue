@@ -2,7 +2,7 @@
     <div>
         <PageLayout>
             <v-card-title>
-                Классификация
+                Прогнозирование баллов
             </v-card-title>
             <v-card-text>
                 <h2 class="mb-4">Ошибки алгоритмов MAPE:</h2>

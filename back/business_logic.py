@@ -8,7 +8,7 @@ import statistics
 from sklearn.neural_network import MLPRegressor
 from sklearn.tree import DecisionTreeRegressor
 from collections import Counter
-
+from config import names
 x, y, data = bring()
 
 #section tree class
@@ -20,10 +20,12 @@ def get_score():
     clf.fit(x_train, y_train)
 
     tree_predict = clf.predict(x_test)
+    print(names)
+    print(clf.feature_importances_)
     tree_error = mean_absolute_percentage_error(np.array(y_test), tree_predict)
 
     mlp = MLPRegressor(max_iter=2000, n_iter_no_change=20,
-                        activation='relu', alpha=0.01, hidden_layer_sizes=[100, 100], tol=0.0000001)
+                        activation='relu', alpha=0.01, hidden_layer_sizes=[100], tol=0.0000001)
     mlp.fit(x_train, y_train)
     mlp_predict = mlp.predict(x_test)
     mlp_error = mean_absolute_percentage_error(np.array(y_test), mlp_predict)
