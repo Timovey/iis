@@ -6,8 +6,7 @@ app = Flask(__name__)
 CORS(app)
 @app.route('/api/params', methods=['GET'])
 def params():
-    res = make_response(jsonify(get_params()),200)
-    return res
+    return jsonify(get_params())
 
 @app.route('/api/calc_classes', methods=['GET'])
 def calc_classes():

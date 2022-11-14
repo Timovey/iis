@@ -5,8 +5,10 @@
                 Классификация
             </v-card-title>
             <v-card-text>
-                <h2>Агломеративная кластеризация - 1</h2>
-                <h2>K-средних - 2</h2>
+                <h2 class="mb-4">Ошибки алгоритмов MAPE:</h2>
+                <h3>mlp - MLPRegressor</h3>
+                <h3>tree - DecisionTreeRegressor</h3>
+                <h3>reg - LinearRegression</h3>
             </v-card-text>
             <v-sparkline :value="value" :gradient="gradient" :smooth="radius || false" :padding="padding"
                 :line-width="width" :stroke-linecap="lineCap" :gradient-direction="gradientDirection" :fill="fill"
@@ -27,20 +29,18 @@ const gradients = [
     ['#f72047', '#ffd200', '#1feaea'],
 ]
 export default {
-    name: 'Class',
+    name: 'Score',
     created() {
-        this.$axios.get('api/calc_classes').then(res => {
+        this.$axios.get('api/score').then(res => {
             let data = JSON.parse(JSON.stringify(res.data))
             for (let [key, value] of Object.entries(data)) {
-                let y = [...Object.values(value.dict)].map(el => `${el} ${this.labelDict[key]}`)
-                console.log(y);
-
-                this.value = [...this.value, ...Object.values(value.stat)]
-                this.labels = [...this.labels, ...y]
+                this.value = [...this.value, value]
+                this.labels = [...this.labels, `${key} ${(value * 100).toFixed(2)} %`]
 
             }
             console.log(this.value);
             console.log(this.labels);
+            console.log(data);
         }).catch(err => console.log(err))
     },
     components: {
@@ -71,7 +71,6 @@ export default {
         }
     },
 }
-
 </script>
 <style lang="">
     

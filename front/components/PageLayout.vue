@@ -1,16 +1,21 @@
 <template >
-    <v-row class="pa-2">
-        <v-col class="col col-12">
-            <v-card>
+    <v-card class="h-100">
+        <v-row>
+            <v-col class="col col-3">
+                <Menu />
+            </v-col>
+            <v-col class="col col-9">
                 <slot />
-            </v-card>
-        </v-col>
-    </v-row>
-
+            </v-col>
+        </v-row>
+    </v-card>
 </template>
 <script>
+import Menu from "@/components/Menu"
 export default {
-
+    components: {
+        Menu
+    }
 }
 </script>
 <style lang="">
